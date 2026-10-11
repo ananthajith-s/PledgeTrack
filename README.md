@@ -1,11 +1,10 @@
 # PledgeTrack
 
-![MERN Stack](https://badgen.net/badge/stack/MERN/6366f1)
-![MongoDB](https://badgen.net/badge/database/MongoDB/47a248)
-![Express.js](https://badgen.net/badge/backend/Express.js/black)
-![React](https://badgen.net/badge/frontend/React/0891b2)
-![Node.js](https://badgen.net/badge/runtime/Node.js/339933)
-![Vite](https://badgen.net/badge/bundler/Vite/646cff)
+![MongoDB](https://img.shields.io/badge/MongoDB-%234ea94b.svg?style=for-the-badge&logo=mongodb&logoColor=white)
+![Express.js](https://img.shields.io/badge/express.js-%23404d59.svg?style=for-the-badge&logo=express&logoColor=%2361DAFB)
+![React](https://img.shields.io/badge/react-%2320232a.svg?style=for-the-badge&logo=react&logoColor=%2361DAFB)
+![NodeJS](https://img.shields.io/badge/node.js-%236DA55F.svg?style=for-the-badge&logo=node.js&logoColor=white)
+![Vite](https://img.shields.io/badge/vite-%23646CFF.svg?style=for-the-badge&logo=vite&logoColor=white)
 
 **PledgeTrack** is a web application built with the MERN stack (MongoDB, Express, React, and Node.js) to track pledges and installment payments in Indian Rupee (**INR - ₹**). It provides two distinct user roles: **Donors**, who create and monitor their own pledges, and **Admins**, who record verified payments and monitor dashboard statistics. The application calculates real-time balances directly from database records and includes concurrency protection to prevent duplicate or excess payments.
 
