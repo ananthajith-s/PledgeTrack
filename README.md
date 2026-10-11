@@ -163,7 +163,7 @@ Visit **[http://localhost:5173](http://localhost:5173)** in your browser:
 
 ---
 
-## AI Development Experience (Kiro)
+## AI-Assisted Development - Kiro
 
 During the development of PledgeTrack, **Kiro** was used as the AI coding assistant to accelerate full-stack delivery, specifically for crafting responsive React components and architecting the resilient payment aggregation pipeline.
 
@@ -183,9 +183,3 @@ During the development of PledgeTrack, **Kiro** was used as the AI coding assist
    - Built multi-stage aggregation queries (`$match`, `$group`, and `$sum`) to calculate total payments directly inside the database.
    - Calculated total pledged, total collected, and remaining balance in a single database query for the admin dashboard summary.
    - Ensured the database collection is the single source of truth instead of keeping static counters that can go out of sync.
-
----
-
-## License
-
-This project is licensed under the [MIT License](LICENSE).
