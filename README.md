@@ -1,6 +1,6 @@
 # PledgeTrack
 
-**PledgeTrack** is a full-stack MERN application designed for institutional and charitable pledge and installment payment tracking. Built with strict role-based access control (Admin & Donor), real-time MongoDB aggregation pipelines, and robust race-condition protection, PledgeTrack manages pledges and records installment payments entirely in Indian Rupee (**INR - ₹**).
+**PledgeTrack** is a web application built with the MERN stack (MongoDB, Express, React, and Node.js) to track pledges and installment payments in Indian Rupee (**INR - ₹**). It provides two distinct user roles: **Donors**, who create and monitor their own pledges, and **Admins**, who record verified payments and monitor dashboard statistics. The application calculates real-time balances directly from database records and includes concurrency protection to prevent duplicate or excess payments.
 
 ---
 
@@ -163,24 +163,20 @@ During the development of PledgeTrack, **Kiro** was used as the AI coding assist
 
 ### Specific Tasks Accomplished with Kiro:
 
-1. **Frontend Component & Modal Development**:
-   - Engineered the responsive Admin Dashboard (`Dashboard.jsx`), donor views (`Pledges.jsx`), and pledge creation form (`PledgeForm.jsx`).
-   - Developed `RecordPaymentModal.jsx` with real-time remaining balance calculations, quick preset buttons, and submission lock guards to prevent accidental double-clicks.
-   - Built `PaymentHistoryModal.jsx` to render itemized installment ledgers formatted in INR.
+1. **Frontend Component and Modal Development**:
+   - Built the React user interface components: the Admin Dashboard, the Donor Pledge list, and the Pledge Creation form.
+   - Created the Record Payment modal with live balance calculations, preset amount buttons, and button disabling to prevent duplicate submissions from double clicks.
+   - Created the Payment History modal to display a clear table of all past installments in INR.
 
-2. **Payment State Machine & Concurrency Architecture**:
-   - Formulated and implemented **Approach B (Post-Insert Verification & Rollback)** inside `paymentController.js`, allowing atomic-like race condition protection on standalone MongoDB instances without requiring replica sets.
-   - Enforced status transition rules (`pending` $\rightarrow$ `partial` $\rightarrow$ `fulfilled`) directly tied to real-time payment sums.
+2. **Payment Logic and Concurrency Handling**:
+   - Implemented the payment processing logic with automatic status updates (`pending`, `partial`, and `fulfilled`).
+   - Added concurrency protection: after each payment is inserted, the server recalculates the total sum from the database. If a race condition occurs and the sum exceeds the pledge balance, the server automatically deletes the invalid record and returns an error.
+   - Added validation rules to reject overpayments and prevent payments on pledges that are already fulfilled.
 
 3. **MongoDB Aggregation Pipeline Optimization**:
-   - Designed multi-stage aggregation queries (`$match`, `$group`, `$sum`, `$cond`) in `dashboardController.js` to compute institutional metrics (`totalPledged`, `totalPaid`, `totalPending`, and status distributions) in a single database round-trip.
-
-4. **Security & Role-Based Middleware Hardening**:
-   - Hardened registration endpoints to disallow role privilege escalation, locking public sign-ups strictly to the `donor` role.
-   - Configured JWT verification middleware and role restriction middleware (`restrictTo('admin')`) to safeguard financial operations.
-
-5. **End-to-End Automated Testing**:
-   - Created automated integration test scripts verifying 11 distinct test cases covering authorization barriers, overpayment rejection, fulfilled pledge locking, and audit trails.
+   - Built multi-stage aggregation queries (`$match`, `$group`, and `$sum`) to calculate total payments directly inside the database.
+   - Calculated total pledged, total collected, and remaining balance in a single database query for the admin dashboard summary.
+   - Ensured the database collection is the single source of truth instead of keeping static counters that can go out of sync.
 
 ---
 
